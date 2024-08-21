@@ -1,40 +1,33 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@4.0.1
+
 jobs:
   build:
     macos:
-      xcode: 15.4.0 # Specify the Xcode version here
+      xcode: 15.4.0
     steps:
-      - checkout # Checkout the code as the first step.
-
-      # Build the project
+      - checkout
       - run:
           name: Build Project
           command: xcodebuild -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGNING_ALLOWED=NO clean build -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
 
-      # Store build artifacts (optional)
-      - store_artifacts:
-          path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Build/Products
-          destination: build-output
-
   test:
     macos:
-      xcode: 15.4.0 # Specify the Xcode version here
+      xcode: 15.4.0
     steps:
-      - checkout # Checkout the code as the first step.
-
-      # Run tests
+      - checkout
       - run:
           name: Run Tests
-          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudyTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGNING_ALLOWED=NO -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
-
-      # Collect test results
+          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
       - store_test_results:
           path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Logs/Test
       - store_artifacts:
           path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Logs/Test
           destination: test-output
+      - codecov/upload: { validate: false }
 
 workflows:
   build_and_test_workflow:
