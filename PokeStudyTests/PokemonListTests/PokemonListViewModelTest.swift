@@ -12,6 +12,7 @@ import Combine
 class PokemonListViewModelTest: XCTestCase {
     var sut: PokemonListViewModel!
     var repository: PokemonListRepositoryStub!
+    var cancellables: Set<AnyCancellable>!
 
     override func setUp() {
         super.setUp()
@@ -19,11 +20,13 @@ class PokemonListViewModelTest: XCTestCase {
         sut = PokemonListViewModel(
             repository: repository
         )
+        cancellables = []
     }
     override func tearDown() {
         super.tearDown()
         sut = nil
         repository = nil
+        cancellables = nil
     }
 
     func testFetchPokemonsIncreasesPokemonsCountByTwo() {
@@ -66,13 +69,12 @@ class PokemonListViewModelTest: XCTestCase {
 
         repository.fetchPokemonsResult = .success([.fixture(), .fixture()])
 
-        var subscriptions = Set<AnyCancellable>()
         sut.$pokemons.sink { pokemon in
             if pokemon.count == 4 {
                 expectation1.fulfill()
             }
         }
-        .store(in: &subscriptions)
+        .store(in: &cancellables)
 
         sut.fetchPokemons()
         sut.loadMorePokemons()
@@ -87,13 +89,19 @@ class PokemonListViewModelTest: XCTestCase {
         let pokemon3 = PokemonEntity.fixture(id: 20)
 
         repository.fetchPokemonsResult = .success([pokemon1, pokemon2, pokemon3])
+        repository.fetchPokemonDetailResult = .success(.fixture())
+
+        sut.$loadingState
+            .dropFirst()
+            .sink { state in
+                if case .loaded = state {
+                    XCTAssertEqual(self.sut.pokemons.map { $0.id }, [5, 10, 20])
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
 
         sut.fetchPokemons()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            XCTAssertEqual(self.sut.pokemons.map { $0.id }, [5, 10, 20])
-            expectation.fulfill()
-        }
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -101,7 +109,6 @@ class PokemonListViewModelTest: XCTestCase {
     func testLoadingStateChangesDuringFetch() {
         let expectation1 = XCTestExpectation(description: "Loading state is loading")
         let expectation2 = XCTestExpectation(description: "Loading state is loaded")
-        var cancellables:Set<AnyCancellable> = []
 
         repository.fetchPokemonsResult = .success([.fixture(), .fixture()])
 
@@ -123,7 +130,6 @@ class PokemonListViewModelTest: XCTestCase {
 
     func testFetchPokemonsFailureShouldSetFailedState() {
         let expectation = XCTestExpectation(description: "Loading state is failed")
-        var cancellables:Set<AnyCancellable> = []
 
         repository.fetchPokemonsResult = .failure(NSError(domain: "TestError", code: 1))
 
