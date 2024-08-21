@@ -1,0 +1,45 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+version: 2.1
+
+jobs:
+  build:
+    macos:
+      xcode: 15.4.0 # Specify the Xcode version here
+    steps:
+      - checkout # Checkout the code as the first step.
+
+      # Build the project
+      - run:
+          name: Build Project
+          command: xcodebuild -workspace PokeStudy.xcworkspace -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' clean build
+
+      # Store build artifacts (optional)
+      - store_artifacts:
+          path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Build/Products
+          destination: build-output
+
+  test:
+    macos:
+      xcode: 15.4.0 # Specify the Xcode version here
+    steps:
+      - checkout # Checkout the code as the first step.
+
+      # Run tests
+      - run:
+          name: Run Tests
+          command: xcodebuild test -workspace PokeStudy.xcworkspace -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -enableCodeCoverage YES
+
+      # Collect test results
+      - store_test_results:
+          path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Logs/Test
+      - store_artifacts:
+          path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Logs/Test
+          destination: test-output
+
+workflows:
+  build_and_test_workflow:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
