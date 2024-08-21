@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Run Tests
-          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
+          command: xcodebuild test -scheme PokeStudy  -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
       - store_test_results:
           path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Logs/Test
       - store_artifacts:
