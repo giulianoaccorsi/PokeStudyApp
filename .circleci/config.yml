@@ -16,7 +16,7 @@ jobs:
           name: Build Project
           command: xcodebuild -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGNING_ALLOWED=NO clean build -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
       
-      - codecov/upload
+      - codecov/upload: { validate: false }
       
       # Store build artifacts (optional)
       - store_artifacts:
