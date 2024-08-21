@@ -10,13 +10,14 @@ jobs:
       xcode: 15.4.0 # Specify the Xcode version here
     steps:
       - checkout # Checkout the code as the first step.
-      - codecov/upload
 
       # Build the project
       - run:
           name: Build Project
           command: xcodebuild -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGNING_ALLOWED=NO clean build -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
-
+      
+      - codecov/upload
+      
       # Store build artifacts (optional)
       - store_artifacts:
           path: ~/Library/Developer/Xcode/DerivedData/PokeStudy/Build/Products
