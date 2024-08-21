@@ -1,26 +1,30 @@
 # PokeStudyApp
 
+[![codecov](https://codecov.io/github/giulianoaccorsi/PokeStudyApp/graph/badge.svg?token=Q6EHFJ4IYG)](https://codecov.io/github/giulianoaccorsi/PokeStudyApp)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/giulianoaccorsi/PokeStudyApp/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/giulianoaccorsi/PokeStudyApp/tree/main)
+
 ### Description
+
 The PokeStudy app uses the [PokeAPI](https://pokeapi.co/) to display detailed information about Pokémon, including stats, abilities, and types. Tapping on a Pokémon will route you to the details screen, which contains comprehensive information about the Pokémon, such as attributes, abilities, and weaknesses.
 
-| List Light Mode| Detail Light Mode | List Dark Mode | Detail Dark Mode |
-| ------------- | ------------- | ----------- | ----------- | 
-| <img src="https://github.com/user-attachments/assets/02a9f2aa-376d-496b-9e89-43f7bfd78426" width="300"> | <img src="https://github.com/user-attachments/assets/b89aa4da-a614-4e94-91ba-6e016a6766b6" width="300"> | <img src="https://github.com/user-attachments/assets/516ea456-c514-43a9-afb5-170800b335c0" width="300"> | <img src="https://github.com/user-attachments/assets/1fcf93b6-2293-45e0-b79d-ed1bb802119a" width="300">
+| List Light Mode                                                                                         | Detail Light Mode                                                                                       | List Dark Mode                                                                                          | Detail Dark Mode                                                                                        |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| <img src="https://github.com/user-attachments/assets/02a9f2aa-376d-496b-9e89-43f7bfd78426" width="300"> | <img src="https://github.com/user-attachments/assets/b89aa4da-a614-4e94-91ba-6e016a6766b6" width="300"> | <img src="https://github.com/user-attachments/assets/516ea456-c514-43a9-afb5-170800b335c0" width="300"> | <img src="https://github.com/user-attachments/assets/1fcf93b6-2293-45e0-b79d-ed1bb802119a" width="300"> |
 
 ## Features
 
-* Modularization using SPM
-* MVVM
-* Infinity Scroll
-* SwiftUI
-* Dark Mode
-* Internationalization (English and PT-Br)
-* Unit tests
-* Combine
+- Modularization using SPM
+- MVVM
+- Infinity Scroll
+- SwiftUI
+- Dark Mode
+- Internationalization (English and PT-Br)
+- Unit tests
+- Combine
 
 ### Instalation
 
-This project was made using **Xcode 15.4**, Swift and SwiftUI and the following SPM Packages: 
+This project was made using **Xcode 15.4**, Swift and SwiftUI and the following SPM Packages:
 
 - [OggDecoder](https://github.com/arkasas/OggDecoder) - A package used to decode Ogg audio files, providing efficient playback within the app.
 
@@ -39,7 +43,6 @@ https://github.com/giulianoaccorsi/PokeStudyApp
 ```
 
 Open the directory project and double tap on PokeStudy.xcodeproj
-
 
 ### Design
 
