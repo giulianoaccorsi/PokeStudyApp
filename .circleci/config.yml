@@ -27,7 +27,7 @@ jobs:
       # Run tests
       - run:
           name: Run Tests
-          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
+          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudyTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates
 
       # Collect test results
       - store_test_results:
