@@ -1,7 +1,7 @@
 # PokeStudyApp
 
 ### Description
-The PokeStudy app uses the [PokeAPI](https://pokeapi.co/) to display detailed information about Pokémon, including stats, abilities, and evolutions. Tapping on a Pokémon will route you to the details screen, which contains comprehensive information about the Pokémon, such as attributes, abilities, and evolution details.
+The PokeStudy app uses the [PokeAPI](https://pokeapi.co/) to display detailed information about Pokémon, including stats, abilities, and types. Tapping on a Pokémon will route you to the details screen, which contains comprehensive information about the Pokémon, such as attributes, abilities, and weaknesses.
 
 | List Light Mode| Detail Light Mode | List Dark Mode | Detail Dark Mode |
 | ------------- | ------------- | ----------- | ----------- | 
