@@ -11,7 +11,7 @@ jobs:
       # Build the project
       - run:
           name: Build Project
-          command: xcodebuild -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' clean build
+          command: xcodebuild -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' clean build -skipPackagePluginValidation -skipMacroValidation
 
       # Store build artifacts (optional)
       - store_artifacts:
@@ -27,7 +27,7 @@ jobs:
       # Run tests
       - run:
           name: Run Tests
-          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -enableCodeCoverage YES
+          command: xcodebuild test -project PokeStudy.xcodeproj -scheme PokeStudy -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -enableCodeCoverage YES -skipPackagePluginValidation -skipMacroValidation
 
       # Collect test results
       - store_test_results:
